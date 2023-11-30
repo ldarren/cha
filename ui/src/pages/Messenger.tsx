@@ -1,7 +1,10 @@
-import { Outlet, NavLink } from "react-router-dom"
+import { Outlet, NavLink, useLoaderData, Form } from "react-router-dom"
 import './Messenger.css'
 
+
 export default function MessengerPage() {
+  const chats = useLoaderData() as Array
+
   return (
     <>
       <div id="sidebar">
@@ -25,19 +28,38 @@ export default function MessengerPage() {
               aria-live="polite"
             ></div>
           </form>
-          <form method="post">
+          <Form method="post">
             <button type="submit">New</button>
-          </form>
+          </Form>
         </div>
         <nav>
-          <ul>
-            <li>
-              <NavLink to={`/chats/1`}>Your Name</NavLink>
-            </li>
-            <li>
-              <NavLink to={`/chats/2`}>Your Friend</NavLink>
-            </li>
-          </ul>
+          {chats && chats.length ? (
+						<ul>
+              {chats.map((chat) => (
+                <li key={chat.id}>
+                  <NavLink to={`/chats/${chat.id}`} className={({ isActive, isPending }) =>
+                      isActive
+                        ? "active"
+                        : isPending
+                        ? "pending"
+                        : ""}>
+                    {chat.first || chat.last ? (
+                      <>
+                        {chat.first} {chat.last}
+                      </>
+                    ) : (
+                      <i>No Name</i>
+                    )}{" "}
+                    {chat.favorite && <span>★</span>}
+                  </NavLink>
+                </li>
+              ))}
+						</ul>
+          ) : (
+            <p>
+              <i>No Chats</i>
+            </p>
+          )}
         </nav>
       </div>
       <div id="detail">

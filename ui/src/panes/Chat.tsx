@@ -1,12 +1,14 @@
 import { Form, useLoaderData } from "react-router-dom"
 
 interface Contact {
+  id: string
   first: string
   last: string
   avatar: string
   twitter: string
   notes: string
   favorite: boolean
+  created_at: Date
 }
 
 export default function ChatPane() {
