@@ -29,10 +29,13 @@ const localforage = {
   }
 }
 
-export async function getChats() {
-  await fakeNetwork(`getChats`);
+export async function getChats(query) {
+  await fakeNetwork(`getChats:${query}`);
   let chats = await localforage.getItem("chats")
   chats = chats || []
+  if (query) {
+    chats = chats.filter(chat => chat.first.includes(query) || chat.last.includes(query))
+  }
   return chats.sort((a, b) => a?.created_at ?? 0 - b?.created_at ?? 0)
 }
 

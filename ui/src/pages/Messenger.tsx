@@ -1,33 +1,44 @@
-import { Outlet, NavLink, useLoaderData, Form } from "react-router-dom"
+import { Outlet, NavLink, Form, useLoaderData, useNavigation, useSubmit } from "react-router-dom"
 import './Messenger.css'
 
 
 export default function MessengerPage() {
-  const chats = useLoaderData() as Array
+  const {q, chats} = useLoaderData() as Array
+	const navigate = useNavigation()
+	const submitFunc = useSubmit()
+  const searching = window.location && !(new URLSearchParams(window.location.search).get("q"))
 
   return (
     <>
       <div id="sidebar">
         <h1>Chat Histories</h1>
         <div>
-          <form id="search-form" role="search">
+          <Form id="search-form" role="search">
             <input
               id="q"
+							className={searching ? "loading" : ""}
               aria-label="Search contacts"
               placeholder="Search"
               type="search"
               name="q"
+							defaultValue={q}
+							onChange={(e) => {
+								const isFirstSearch = q == null
+								submitFunc(e.currentTarget.form, {
+									replace: !isFirstSearch
+								})
+							}}
             />
             <div
               id="search-spinner"
               aria-hidden
-              hidden={true}
+              hidden={!!searching}
             />
             <div
               className="sr-only"
               aria-live="polite"
             ></div>
-          </form>
+          </Form>
           <Form method="post">
             <button type="submit">New</button>
           </Form>
@@ -62,7 +73,10 @@ export default function MessengerPage() {
           )}
         </nav>
       </div>
-      <div id="detail">
+      <div
+				id="detail"
+				className={navigate.state === 'loading' ? 'loading' : undefined}
+			>
         <Outlet />
       </div>
     </>

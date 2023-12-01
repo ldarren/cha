@@ -1,4 +1,4 @@
-import { Form, useLoaderData } from "react-router-dom"
+import { Form, useLoaderData, useFetcher } from "react-router-dom"
 
 interface Contact {
   id: string
@@ -13,7 +13,6 @@ interface Contact {
 
 export default function ChatPane() {
   const contact = useLoaderData() as Contact
-
 
   return (
     <div id="contact">
@@ -59,10 +58,10 @@ export default function ChatPane() {
             onSubmit={(event) => {
               if (
                 !confirm(
-                  "Please confirm you want to delete this record."
+                  "Please confirm you want to delete this chat."
                 )
               ) {
-                event.preventDefault();
+                event.preventDefault()
               }
             }}
           >
@@ -79,10 +78,14 @@ interface FavoriteProps {
 }
 
 function Favorite({ contact }: FavoriteProps) {
-  // yes, this is a `let` for later
-  const favorite = contact.favorite;
+  const fetcher = useFetcher()
+  let favorite = contact.favorite
+  // fix for unresponsive favorite button
+  if (fetcher.formData) {
+    favorite = fetcher.formData.get("favorite") === "true";
+  }
   return (
-    <Form method="post">
+    <fetcher.Form method="post">
       <button
         name="favorite"
         value={favorite ? "false" : "true"}
@@ -94,6 +97,6 @@ function Favorite({ contact }: FavoriteProps) {
       >
         {favorite ? "★" : "☆"}
       </button>
-    </Form>
+    </fetcher.Form>
   )
 }

@@ -1,7 +1,8 @@
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, useLoaderData, useNavigate } from "react-router-dom";
 
 export default function EditChat() {
-  const chat = useLoaderData();
+  const chat = useLoaderData()
+  const navigateFunc = useNavigate()
 
   return (
     <Form method="post" id="chat-form">
@@ -51,7 +52,12 @@ export default function EditChat() {
       </label>
       <p>
         <button type="submit">Save</button>
-        <button type="button">Cancel</button>
+        <button
+            type="button"
+            onClick={() => navigateFunc(-1)}
+        >
+            Cancel
+        </button>
       </p>
     </Form>
   );
