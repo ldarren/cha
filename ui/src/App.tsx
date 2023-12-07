@@ -2,7 +2,7 @@
 import React from 'react'
 import { Flex } from 'antd'
 import { Outlet } from "react-router-dom"
-import Launcher from './ele/Launcher'
+import Launcher from './components/Launcher'
 
 const appStyle: React.CSSProperties = {
   width: '100%',

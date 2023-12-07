@@ -3,7 +3,7 @@ import './Messenger.css'
 
 
 export default function MessengerPage() {
-  const {q, chats} = useLoaderData()
+  const {q, chats} = useLoaderData() as {q: string, chats: ChatHistory[]}
 	const navigate = useNavigation()
 	const submitFunc = useSubmit()
   const searching = window.location && !(new URLSearchParams(window.location.search).get("q"))
@@ -82,4 +82,3 @@ export default function MessengerPage() {
     </>
   );
 }
-

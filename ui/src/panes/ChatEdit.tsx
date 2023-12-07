@@ -1,7 +1,7 @@
 import { Form, useLoaderData, useNavigate } from "react-router-dom";
 
 export default function EditChat() {
-  const chat = useLoaderData()
+  const chat = useLoaderData() as ChatHistory
   const navigateFunc = useNavigate()
 
   return (

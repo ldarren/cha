@@ -1,3 +1,3 @@
 Ref:
 - https://reactrouter.com/en/main/start/tutorial#the-root-route
-- https://github.com/enjoycoding/vite-plugin-mock-server/tree/main
+- https://vite-plugin-mock-dev-server.netlify.app/en/guide/usage

@@ -1,13 +1,22 @@
 {
-  "name": "butler",
+  "name": "cha ui",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development vite --mode development",
-    "build": "tsc && vite build",
+    "mock": "NODE_ENV=development vite --mode mock",
+    "local": "NODE_ENV=development vite --mode local",
+    "dev": "NODE_ENV=development vite --mode dev",
+    "uat": "NODE_ENV=staging vite --mode uat",
+    "prod": "NODE_ENV=production vite --mode prod",
+    "build:mock": "tsc && NODE_ENV=development vite build --mode mock",
+    "build:dev": "tsc && vite build --mode dev",
+    "build:uat": "tsc && vite build --mode uat",
+    "build": "tsc && NODE_ENV=production vite build --mode prod",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "antd": "^5.11.1",
@@ -16,6 +25,8 @@
     "react-router-dom": "^6.18.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.1.2",
+    "@types/node": "^20.10.3",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -24,7 +35,10 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "jsdom": "^23.0.1",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^5.0.6",
+    "vite-plugin-mock-dev-server": "^1.4.0",
+    "vitest": "^1.0.1"
   }
 }

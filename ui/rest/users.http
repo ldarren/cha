@@ -1,0 +1,5 @@
+### authorize
+GET http://localhost:5173/api/chats/yyy/meta
+
+### exchange token
+POST http://localhost:13039/api/users/token

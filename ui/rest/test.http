@@ -1,0 +1,25 @@
+### Ping endpoint
+GET http://localhost:13063
+
+### Test Post Endpoint
+POST http://localhost:13063/api/mock
+
+{
+  "content": "content 1"
+}
+
+### Test Get Endpoint
+GET http://localhost:13063/api/mock/a6239233-6d5d-48cc-84bc-a1ed0cb82516
+
+### Test List Endpoint
+GET http://localhost:13063/api/mock
+
+### Test Update Endpoint
+PUT http://localhost:13063/api/mock/a6239233-6d5d-48cc-84bc-a1ed0cb82516
+
+{
+  "content": "333"
+}
+
+### Test Delete Endpoint
+DELETE http://localhost:13063/api/mock/a6239233-6d5d-48cc-84bc-a1ed0cb82516
